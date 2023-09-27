@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 
 const expressLayouts = require('express-ejs-layouts')
-const port = 3737
+const port = process.env.PORT || 3737
 const requestLogger = require('./middlewares/request_logger')
 const reqBodyMethodOverride = require('./middlewares/req_body_method_override')
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(reqBodyMethodOverride)
 
 // enable session as an object in req so we can write values in it - default to using cookies
-app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true}))
+app.use(session({secret: process.env.SESSION_SECRET || "mistyrose", resave: false, saveUninitialized: true}))
 
 
 
